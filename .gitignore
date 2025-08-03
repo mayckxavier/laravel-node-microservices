@@ -1,0 +1,45 @@
+# Laravel & Node.js .gitignore
+
+# Laravel specific
+/laravel-app/node_modules
+/laravel-app/public/hot
+/laravel-app/public/storage
+/laravel-app/storage/*.key
+/laravel-app/vendor
+/laravel-app/.env
+/laravel-app/.env.backup
+/laravel-app/.phpunit.result.cache
+/laravel-app/Homestead.json
+/laravel-app/Homestead.yaml
+/laravel-app/npm-debug.log
+/laravel-app/yarn-error.log
+/laravel-app/.idea
+/laravel-app/.vscode
+/laravel-app/*.sublime-workspace
+/laravel-app/.DS_Store
+
+# Node.js specific
+/node-app/node_modules
+/node-app/npm-debug.log
+/node-app/yarn-error.log
+/node-app/.env
+/node-app/.env.local
+/node-app/.env.development.local
+/node-app/.env.test.local
+/node-app/.env.production.local
+/node-app/coverage
+/node-app/dist
+/node-app/build
+/node-app/.DS_Store
+/node-app/.idea
+/node-app/.vscode
+/node-app/*.sublime-workspace
+
+# Common ignores
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+*.swp
+*.swo
