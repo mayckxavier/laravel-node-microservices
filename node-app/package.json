@@ -1,0 +1,18 @@
+{
+  "name": "node-app",
+  "version": "1.0.0",
+  "description": "Node.js microservice",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "prod": "pm2 start app.js --name node-app --no-daemon"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "pm2": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
