@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # Laravel Application
+  laravel-app:
+    build:
+      context: ./laravel-app
+      dockerfile: Dockerfile
+    container_name: laravel-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./laravel-app:/var/www/html
+    ports:
+      - "8000:80"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_KEY=base64:FNwdD966orC1YWK5BA4eIDwv5prdBeGAyn0sP/mLMsA=
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=laravel_app
+      - DB_USERNAME=laravel
+      - DB_PASSWORD=secret
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  # Node.js Application
+  node-app:
+    build:
+      context: ./node-app
+      dockerfile: Dockerfile
+    container_name: node-app
+    restart: unless-stopped
+    working_dir: /usr/src/app
+    volumes:
+      - ./node-app:/usr/src/app
+    ports:
+      - "3000:3000"
+    command: npm run dev
+    networks:
+      - app-network
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel_app
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root_secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+# Volumes
+volumes:
+  mysql-data:
+    driver: local
+
+# Networks
+networks:
+  app-network:
+    driver: bridge
