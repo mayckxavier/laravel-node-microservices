@@ -262,4 +262,40 @@ class UserAPITest extends TestCase
             ]
         ]);
     }
+
+    public function test_delete_user_successfully(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->delete(route('users.delete', $user->id));
+
+        $response->assertStatus(204);
+        $this->assertDatabaseMissing('users', ['id' => $user->id]);
+    }
+
+    public function test_delete_user_not_found(): void
+    {
+        $nonExistentId = 9999;
+
+        $response = $this->delete(route('users.delete', $nonExistentId));
+
+        $response->assertStatus(404);
+    }
+
+    public function test_delete_already_deleted_user(): void
+    {
+        $user = User::factory()->create();
+        $userId = $user->id;
+
+        $this->delete(route('users.delete', $userId));
+
+        $response = $this->delete(route('users.delete', $userId));
+        $response->assertStatus(404);
+    }
+
+    public function test_delete_user_with_invalid_id_format(): void
+    {
+        $response = $this->delete(route('users.delete', 'invalid-id'));
+        $response->assertStatus(404);
+    }
 }

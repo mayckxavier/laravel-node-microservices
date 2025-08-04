@@ -13,5 +13,5 @@ Route::prefix('users')->group(function () {
     Route::get('{id}', [UserController::class, 'show'])->name('users.getById');
     Route::post('', [UserController::class, 'register'])->name('users.register');
     Route::put('{id}', [UserController::class, 'update'])->name('users.update');
-
+    Route::delete('{id}', [UserController::class, 'destroy'])->name('users.delete');
 });
