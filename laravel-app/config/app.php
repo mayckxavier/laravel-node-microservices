@@ -53,6 +53,9 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'external_service_base_url' => env('EXTERNAL_SERVICE_BASE_URL', 'http://node-app:3000'),
+
+
 
     /*
     |--------------------------------------------------------------------------

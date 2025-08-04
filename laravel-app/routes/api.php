@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ExternalController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,5 @@ Route::prefix('users')->group(function () {
     Route::put('{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('{id}', [UserController::class, 'destroy'])->name('users.delete');
 });
+
+Route::get('external', [ExternalController::class, 'index'])->name('external.getAll');
