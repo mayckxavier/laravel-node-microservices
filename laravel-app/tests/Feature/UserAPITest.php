@@ -103,4 +103,16 @@ class UserAPITest extends TestCase
             ]
         ]);
     }
+
+    public function test_get_by_id(){
+        $user = User::factory()->create();
+
+        $response = $this->get(route('users.getById', $user->id));
+        $response->assertStatus(200);
+    }
+
+    public function test_get_by_id_not_found(){
+        $response = $this->get(route('users.getById', 1));
+        $response->assertStatus(404);
+    }
 }
