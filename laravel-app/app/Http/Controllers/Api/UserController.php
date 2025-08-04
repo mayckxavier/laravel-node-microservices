@@ -32,10 +32,5 @@ class UserController extends Controller
         ]);
 
         return new UserResource($user);
-
-//        return response()->json([
-//            'message' => 'User registered successfully',
-//            'user' => $user
-//        ], 201);
     }
 }
