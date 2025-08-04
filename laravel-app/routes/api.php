@@ -1,14 +1,15 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
 
-//Route::get('/user', function (Request $request) {
-//    return $request->user();
-//})->middleware('auth:sanctum');
+Route::get('/health', function () {
+    return 'ok';
+});
 
 
-Route::prefix('user')->group(function () {
-    Route::post('', [RegisterController::class, 'userRegister']);
+Route::prefix('users')->group(function () {
+    Route::get('', [UserController::class, 'index']);
+    Route::post('', [UserController::class, 'register']);
+
 });
